@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import './Registrarse.css'; // Estilos específicos para este formulario
+import './Registrarse.css';
+import { useNavigate } from 'react-router-dom';
 
 function Registrarse() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [role, setRole] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [birthdayDate, setBirthdayDate] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Declaración de useNavigate
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = { name, email, password, role };
+    const userData = { name, username, address, birthdayDate, password };
 
     try {
-      const response = await fetch('/api/register', {
+      const response = await fetch('http://localhost:8080/users/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -20,17 +25,16 @@ function Registrarse() {
         body: JSON.stringify(userData),
       });
 
-      const data = await response.json();
-
-      if (data.success) {
-        // Redirigir a la página de inicio de sesión o mostrar un mensaje de éxito
-        alert('Registro exitoso, ahora puedes iniciar sesión');
-        window.location.href = '/login';
+      if (response.ok) {
+        alert('Registro exitoso, ahora puedes acceder como cliente');
+        navigate('/dashboard/user'); // Redirige al dashboard de cliente
       } else {
-        alert('Error al registrarse');
+        const errorData = await response.json();
+        setError(errorData.message || 'Error al registrarse');
       }
     } catch (error) {
       console.error('Error en el registro:', error);
+      setError('Error al registrarse: ' + error.message);
     }
   };
 
@@ -48,11 +52,38 @@ function Registrarse() {
           />
         </div>
         <div className="form-group">
+          <label>Nombre de Usuario:</label> {/* campo para username */}
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
           <label>Email:</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Dirección:</label>
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Fecha de Nacimiento:</label>
+          <input
+            type="date"
+            value={birthdayDate}
+            onChange={(e) => setBirthdayDate(e.target.value)}
             required
           />
         </div>
@@ -65,19 +96,7 @@ function Registrarse() {
             required
           />
         </div>
-        <div className="form-group">
-          <label>Rol:</label>
-          <select
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            required
-          >
-            <option value="">Selecciona un rol</option>
-            <option value="admin">Administrador</option>
-            <option value="employee">Empleado</option>
-            <option value="client">Cliente</option>
-          </select>
-        </div>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Registrarse</button>
       </form>
     </div>

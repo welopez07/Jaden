@@ -18,7 +18,7 @@ function Login() {
       const data = await response.json();
 
       if (data.success) {
-        const userRole = data.role; // Suponiendo que el rol viene en la respuesta
+        const userRole = data.role;
         switch (userRole) {
           case 'admin':
             window.location.href = '/dashboard/admin';
@@ -43,7 +43,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(); // Llamamos a la función de login cuando el formulario se envía
+    handleLogin(); // Llama a la función de login cuando el formulario se envía
   };
 
   return (
