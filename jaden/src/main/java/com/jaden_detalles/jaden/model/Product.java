@@ -9,22 +9,34 @@ import java.util.List;
  * Cada producto puede estar relacionado con múltiples detalles de pedido.
  */
 @Entity
+@Table(name = "products")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     private String description;
     private BigDecimal price;
+    /**
+     * Relación muchos a muchos con los detalles del pedido.
+     * Un producto puede estar en múltiples detalles de pedido.
+     */
     @OneToMany(mappedBy = "product")
-    private List<OrderDetail> orderDetail;
+    private List<OrderDetail> orderDetails;
 
-    public int getId() {
+    public Product() {
+    }
+
+    public Product(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,11 +64,11 @@ public class Product {
         this.price = price;
     }
 
-    public List<OrderDetail> getOrderDetail() {
-        return orderDetail;
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
     }
 
-    public void setOrderDetail(List<OrderDetail> orderDetail) {
-        this.orderDetail = orderDetail;
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

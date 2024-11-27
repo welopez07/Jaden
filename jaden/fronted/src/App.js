@@ -6,6 +6,8 @@ import Login from './pages/Login';
 import UserDashboard from './pages/UserDashboard';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import AdminPanel from './pages/AdminPanel';
+import AdminLogin from './components/AdminLogin';
+import PrivateRoute from './components/PrivateRoute';
 import Productos from './pages/Productos';
 import Pedidos from './pages/Pedidos';
 import Contacto from './pages/Contacto';
@@ -25,7 +27,8 @@ function App() {
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/dashboard/user" element={<UserDashboard />} />
         <Route path="/dashboard/employee" element={<EmployeeDashboard />} />
-        <Route path="/dashboard/admin" element={<AdminPanel />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/dashboard/admin" element={<PrivateRoute><AdminPanel /></PrivateRoute>} />
       </Routes>
     </Router>
   );
