@@ -16,8 +16,6 @@ public enum RoleType {
         return this.level < targetRole.level;
     }
 
-
-
 }
 
 

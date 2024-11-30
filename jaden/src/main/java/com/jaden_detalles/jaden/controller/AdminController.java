@@ -1,13 +1,15 @@
 package com.jaden_detalles.jaden.controller;
 
-import com.jaden_detalles.jaden.dto.JwtResponse;
-import com.jaden_detalles.jaden.dto.LoginRequest;
+import com.jaden_detalles.jaden.dto.*;
 import com.jaden_detalles.jaden.model.Order;
 import com.jaden_detalles.jaden.model.Product;
 import com.jaden_detalles.jaden.model.User;
 import com.jaden_detalles.jaden.service.AdminService;
 import com.jaden_detalles.jaden.service.AuthService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.jaxb.SpringDataJaxb;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -47,62 +49,75 @@ public class AdminController {
 
     // Gestión de usuarios
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
         return ResponseEntity.ok(adminService.getAllUsers());
     }
 
     @PostMapping("/users")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        return ResponseEntity.ok(adminService.createUser(user));
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest userRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(adminService.createUser(userRequest));
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
-        return ResponseEntity.ok(adminService.updateUser(id, user));
+    public ResponseEntity<UserResponse> updateUser(
+            @PathVariable Long id,
+            @Valid @RequestBody UserRequest userRequest
+    ) {
+        return ResponseEntity.ok(adminService.updateUser(id, userRequest));
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        adminService.deleteUserById(id);
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        adminService.deleteUser(id);
         return ResponseEntity.ok().build();
     }
 
     // Gestión de productos
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getAllProducts() {
+    public ResponseEntity<List<ProductDTO>> getAllProducts() {
         return ResponseEntity.ok(adminService.getAllProducts());
     }
 
     @PostMapping("/products")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        return ResponseEntity.ok(adminService.createProduct(product));
+    public ResponseEntity<ProductDTO> createProduct(
+            @Valid @RequestBody ProductDTO productDTO
+    ) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(adminService.createProduct(productDTO));
     }
 
     @PutMapping("/products/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
-        return ResponseEntity.ok(adminService.updateProduct(id, product));
+    public ResponseEntity<ProductDTO> updateProduct(
+            @PathVariable Long id,
+            @Valid @RequestBody ProductDTO productDTO
+    ) {
+        return ResponseEntity.ok(adminService.updateProduct(id, productDTO));
     }
 
     @DeleteMapping("/products/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
-        adminService.deleteProductById(id);
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+        adminService.deleteProduct(id);
         return ResponseEntity.ok().build();
     }
 
     // Gestión de pedidos
     @GetMapping("/orders")
-    public ResponseEntity<List<Order>> getAllOrders() {
+    public ResponseEntity<List<OrderDTO>> getAllOrders() {
         return ResponseEntity.ok(adminService.getAllOrders());
     }
 
     @PutMapping("/orders/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable Integer id, @RequestBody Order order) {
-        return ResponseEntity.ok(adminService.updateOrder(id, order));
+    public ResponseEntity<OrderDTO> updateOrder(
+            @PathVariable Integer id,
+            @Valid @RequestBody OrderDTO orderDTO
+    ) {
+        return ResponseEntity.ok(adminService.updateOrder(id, orderDTO));
     }
 
     @DeleteMapping("/orders/{id}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable Integer id) {
-        adminService.deleteOrderById(id);
+    public ResponseEntity<?> deleteOrder(@PathVariable Integer id) {
+        adminService.deleteOrder(id);
         return ResponseEntity.ok().build();
     }
 }
