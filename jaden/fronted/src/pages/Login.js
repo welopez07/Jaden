@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import './Login.css';
+import './styles/Login.css';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
     try {
-      const response = await fetch('http://localhost:8080/api/login', {
+      const response = await fetch('http://localhost:8080/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -15,41 +20,39 @@ function Login() {
         body: JSON.stringify({ email, password }), // Envía los datos del login
       });
 
-      const data = await response.json();
+      if (!response.ok) {
+        const errorText = await response.text();
+        setError(errorText || 'Error al iniciar sesión');
+        return;
+      }
 
-      if (data.success) {
-        const userRole = data.role;
-        switch (userRole) {
-          case 'admin':
-            window.location.href = '/dashboard/admin';
-            break;
-          case 'employee':
-            window.location.href = '/dashboard/employee';
-            break;
-          case 'client':
-            window.location.href = '/dashboard/user';
-            break;
-          default:
-            alert('Rol no reconocido');
-            break;
-        }
+      const data = await response.json();
+      console.log('Datos de respuesta:', data);
+
+      // Guardar token y roles
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('roles', JSON.stringify(data.roles));
+
+      // Redirección basada en roles
+      if (data.roles.includes('ROLE_ADMIN')) {
+        navigate('/dashboard/admin');
+      } else if (data.roles.includes('ROLE_EMPLOYEE')) {
+        navigate('/dashboard/employee');
+      } else if (data.roles.includes('ROLE_CLIENT')) {
+        navigate('/dashboard/user');
       } else {
-        alert('Error al iniciar sesión');
+        throw new Error('Rol no reconocido');
       }
     } catch (error) {
-      console.error('Error en el login:', error);
+      console.error('Error de inicio de sesión:', error);
+      setError(error.message);
     }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleLogin(); // Llama a la función de login cuando el formulario se envía
   };
 
   return (
     <div className="login-container">
       <h1>Iniciar Sesión</h1>
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <div className="form-group">
           <label>Email:</label>
           <input
@@ -68,6 +71,7 @@ function Login() {
             required
           />
         </div>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Iniciar Sesión</button>
       </form>
     </div>

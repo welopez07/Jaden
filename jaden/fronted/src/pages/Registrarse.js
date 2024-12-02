@@ -1,37 +1,52 @@
 import React, { useState } from 'react';
-import './Registrarse.css';
+import './styles/Registrarse.css';
 import { useNavigate } from 'react-router-dom';
 
 function Registrarse() {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [birthdayDate, setBirthdayDate] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    username: '',
+    email: '',
+    address: '',
+    birthdayDate: '',
+    password: '',
+    roleType: 'CLIENT'
+  });
+
   const [error, setError] = useState(null);
   const navigate = useNavigate(); // Declaración de useNavigate
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const userData = { name, username, address, birthdayDate, password };
+     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/users/create', {
+
+      const response = await fetch('http://localhost:8080/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        alert('Registro exitoso, ahora puedes acceder como cliente');
-        navigate('/dashboard/user'); // Redirige al dashboard de cliente
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || 'Error al registrarse');
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'Error al registrarse');
       }
+
+      await response.json();
+
+      alert('Registro exitoso, ahora puedes iniciar sesión');
+      navigate('/login');
+
     } catch (error) {
       console.error('Error en el registro:', error);
       setError('Error al registrarse: ' + error.message);
@@ -41,13 +56,14 @@ function Registrarse() {
   return (
     <div className="register-container">
       <h1>Registrarse</h1>
-      <form className="register-form" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Nombre:</label>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
             required
           />
         </div>
@@ -55,8 +71,9 @@ function Registrarse() {
           <label>Nombre de Usuario:</label> {/* campo para username */}
           <input
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
             required
           />
         </div>
@@ -64,8 +81,9 @@ function Registrarse() {
           <label>Email:</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             required
           />
         </div>
@@ -73,8 +91,9 @@ function Registrarse() {
           <label>Dirección:</label>
           <input
             type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
             required
           />
         </div>
@@ -82,8 +101,9 @@ function Registrarse() {
           <label>Fecha de Nacimiento:</label>
           <input
             type="date"
-            value={birthdayDate}
-            onChange={(e) => setBirthdayDate(e.target.value)}
+            name="birthdayDate"
+            value={formData.birthdayDate}
+            onChange={handleChange}
             required
           />
         </div>
@@ -91,8 +111,9 @@ function Registrarse() {
           <label>Contraseña:</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
             required
           />
         </div>

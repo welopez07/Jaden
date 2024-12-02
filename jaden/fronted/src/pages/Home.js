@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Home.css'; // Asegúrate de tener este archivo para estilos
+import './styles/Home.css';
 
 function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
