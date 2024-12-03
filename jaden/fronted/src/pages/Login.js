@@ -49,6 +49,11 @@ function Login() {
     }
   };
 
+  // Función para navegar a la página de registro
+  const handleRegister = () => {
+    navigate('/registrarse');
+  };
+
   return (
     <div className="login-container">
       <h1>Iniciar Sesión</h1>
@@ -74,6 +79,22 @@ function Login() {
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Iniciar Sesión</button>
       </form>
+      {/* Nuevo bloque para registro */}
+      <div className="register-section">
+        <p>
+          ¿No tienes una cuenta? {' '}
+          <span
+            onClick={handleRegister}
+            style={{
+              color: 'blue',
+              cursor: 'pointer',
+              textDecoration: 'underline'
+            }}
+          >
+            Regístrate
+          </span>
+        </p>
+      </div>
     </div>
   );
 }

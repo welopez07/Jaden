@@ -5,6 +5,7 @@ export const authService = {
   logout: () => {
     // Eliminar token del localStorage
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     // Opcional: invalidar token en backend
     return axiosInstance.post('/auth/logout');
   },
