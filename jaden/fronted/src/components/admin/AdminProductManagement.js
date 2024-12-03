@@ -104,7 +104,7 @@ function AdminProductManagement() {
             <tr key={product.id}>
               <td>{product.name}</td>
               <td>{product.description}</td>
-              <td>${product.price}</td>
+              <td>${product.price}</td> y tambien la catidad
               <td>{product.stock}</td>
               <td>
                 <button>Editar</button>
