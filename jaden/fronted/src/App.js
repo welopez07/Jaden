@@ -21,7 +21,13 @@ import AdminOrderManagement from './components/admin/AdminOrderManagement';
 
 function App() {
   return (
-    <Router>
+    <Router
+      future={{
+        // Habilita las futuras características de React Router
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    >
       <Header />
       <Routes>
         {/* Rutas públicas */}
