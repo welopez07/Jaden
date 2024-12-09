@@ -1,43 +1,167 @@
+/* Estilo base del header */
 .header {
+    background-color: #FFF9EE;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 10vh;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+}
+
+/* Contenedor principal del header */
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333; /* Color del fondo */
-    padding: 10px 20px;
 }
 
+/* Logo */
 .logo-img {
-    width: 70px;
-    height: auto;
+    height: 40px;
+    width: auto;
+    cursor: pointer;
 }
 
+/* Menú hamburguesa */
+.menu-toggle {
+    display: none; /* Oculto en pantallas grandes */
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: #000;
+    margin: 3px 0;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+/* Navbar para pantallas grandes */
 .navbar {
-    flex-grow: 1;
-    display: flex;
-    justify-content: flex-end;
+    display: flex; /* Visible en pantallas grandes */
+    align-items: center;
+    gap: 20px;
 }
 
 .nav-links {
     list-style: none;
-    display: flex;
-    gap: 20px; /* Espacio entre los enlaces */
     margin: 0;
     padding: 0;
+    display: flex;
+    gap: 20px;
 }
 
 .nav-links li {
-    display: inline;
-}
-
-.nav-links li a {
-    text-decoration: none;
-    color: white;
+    cursor: pointer;
     font-size: 18px;
-    padding: 10px;
+    color: #000;
+    transition: color 0.3s ease;
 }
 
-.nav-links li a:hover {
-    background-color: #575757;
-    border-radius: 4px;
-    transition: background-color 0.3s ease-in-out;
+.nav-links li:hover {
+    color: #ffcc00;
+}
+
+/* Responsive Design para pantallas pequeñas */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex; /* Visible en pantallas pequeñas */
+    }
+
+    .navbar {
+        display: none !important; /* Oculto en pantallas pequeñas */
+    }
+
+    /* Menú desplegable para móviles */
+    .mobile-menu {
+        display: none;
+    }
+
+    .mobile-menu.active {
+        display: block; /* Mostrar solo cuando está activo */
+    }
+
+
+    /* Animaciones para el menú hamburguesa */
+    .menu-toggle span.rotate-45 {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle span.opacity-0 {
+        opacity: 0;
+    }
+
+    .menu-toggle span.-rotate-45 {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Menú desplegable móvil */
+    .mobile-menu {
+        display: block;
+        position: fixed;
+        top: 10vh;
+        left: 0;
+        width: 100%;
+        background-color: #FFF9EE;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.3s ease;
+    }
+
+    .mobile-navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mobile-nav-links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .mobile-nav-links li {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #f0f0f0;
+        cursor: pointer;
+    }
+
+    .mobile-nav-links li:hover {
+        background-color: #f0f0f0;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+}
+
+/* Estilos para pantallas grandes */
+@media (min-width: 769px) {
+    .navbar {
+        display: flex;
+    }
+
+    .mobile-menu {
+        display: none;
+    }
 }

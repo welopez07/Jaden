@@ -1,6 +1,11 @@
+body {
+    background-color: #FFF5E8;
+    font-family: 'Poppins', sans-serif;
+}
+
 .contact-container {
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #fffbeb;
 }
 
 .contact-header {
@@ -46,8 +51,8 @@
 
 .contact-form button {
     padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+    background-color: #fde7b6;
+    color: #0e0b08;
     border: none;
     border-radius: 5px;
     cursor: pointer;

@@ -149,7 +149,7 @@ function AdminUserManagement() {
   };
 
   return (
-    <Container fluid className="p-4">
+    <Container fluid className="p-4 mt-5">
       {error && (
         <Alert variant="danger" onClose={() => setError(null)} dismissible>
           {error}

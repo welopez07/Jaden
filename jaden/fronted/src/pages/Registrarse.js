@@ -55,7 +55,7 @@ function Registrarse() {
 
   return (
     <div className="register-container">
-      <h1>Registrarse</h1>
+      <h1>Crear una nueva cuenta</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Nombre:</label>

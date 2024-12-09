@@ -1,110 +1,58 @@
-/*
+/* AdminDashboard.css */
+body {
+    background-color: #FFF5E8 !important;
+    font-family: 'Poppins', sans-serif;
+}
+
 .admin-dashboard {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f5f5f5;
-  font-family: Arial, sans-serif;
+    background-color: #FFF5E8;
+    min-height: 100vh;
+    padding-top: 80px; /* Ajuste para prevenir superposición con el encabezado */
 }
 
-.title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 2.5rem;
-  color: #333;
+.admin-dashboard h1 {
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    margin-bottom: 20px;
 }
 
-.form-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 40px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.admin-dashboard .card {
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
 }
 
-.user-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.admin-dashboard .card:hover {
+    transform: translateY(-10px);
 }
 
-.input-field {
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.admin-dashboard .btn {
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
-.user-list-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.admin-dashboard .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.user-list {
-  list-style-type: none;
-  padding: 0;
+/* Estilos específicos para botones */
+.admin-dashboard .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
 }
 
-.user-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid #ccc;
+.admin-dashboard .btn-primary,
+.admin-dashboard .btn-secondary,
+.admin-dashboard .btn-info {
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
-.user-item:last-child {
-  border-bottom: none;
+.admin-dashboard .btn-primary:hover,
+.admin-dashboard .btn-secondary:hover,
+.admin-dashboard .btn-info:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
-
-.action-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.btn {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.submit-btn {
-  background-color: #28a745;
-  color: white;
-}
-
-.edit-btn {
-  background-color: #ffc107;
-  color: white;
-}
-
-.delete-btn {
-  background-color: #dc3545;
-  color: white;
-}
-
-.btn:hover {
-  opacity: 0.9;
-}
-
-@media (max-width: 768px) {
-  .admin-dashboard {
-    padding: 10px;
-  }
-
-  .title {
-    font-size: 2rem;
-  }
-
-  .input-field {
-    font-size: 0.9rem;
-  }
-
-  .btn {
-    padding: 6px 10px;
-  }
-}
-*/

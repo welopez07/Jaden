@@ -7,6 +7,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import authService from '../../services/authService';
 import dashboardService from '../../services/dashboardService';
+import "../../pages/styles/AdminDashboard.css";
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -77,7 +78,7 @@ function AdminDashboard() {
   }
 
   return (
-    <Container fluid className="p-4">
+    <Container fluid className="p-4 mt-5">
       <Row className="mb-4 align-items-center">
         <Col>
           <h1>Panel de Administración</h1>

@@ -32,9 +32,9 @@ const Contacto = () => {
                 <div className="company-info">
                     <h2>Sobre Nosotros</h2>
                     <p>Somos una empresa dedicada a la venta de productos exclusivos.</p>
-                    <p>Teléfono: +123 456 7890</p>
-                    <p>Correo: contacto@empresa.com</p>
-                    <p>Dirección: Calle Ejemplo, 123, Ciudad</p>
+                    <p>Teléfono: +57 123 456 78 90</p>
+                    <p>Correo: contacto@jaden.com</p>
+                    <p>Dirección: Calle 4 # 1-23, Armenia, Quindio</p>
 
                     <h3>Síguenos en redes sociales:</h3>
                     <ul>

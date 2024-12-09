@@ -1,20 +1,43 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+body, html {
+  background-color: #FFF9EE !important; /* Fondo crema claro */
+  font-family: 'Poppins', sans-serif; /* Fuente general */
+  color: #000; /* Texto en negro */
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding-top: 80px;
+  line-height: 1.6;
+  font-size: 16px; /* Tamaño de fuente base */
 }
 
-header {
-  background-color: #f8f9fa;
-  padding: 10px;
-  text-align: center;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    color: #000; /* Títulos en negro */
+
 }
 
-nav a {
-  margin: 0 10px;
-  text-decoration: none;
-  color: #007bff;
+p, span, div, a {
+    color: #000 !important; /* Texto en gris suave */
+    font-family: 'Poppins', sans-serif;
 }
 
-main {
-  padding: 20px;
+/* Ajustes para consistencia de tamaño de letra */
+.nav-links li a {
+    font-size: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: #000 !important;
+    transition: color 0.3s ease;
+}
+
+/* Links activos */
+a:hover {
+  color: #333 !important; /* Ejemplo de color para hover en enlaces */
+}
+
+/* Ajuste de margen para el contenedor principal */
+.container-fluid p-4 {
+    margin-top: 20vh; /* Ajusta este valor si cambias la altura del header */
 }

@@ -3,8 +3,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Ocupa toda la pantalla */
-  background-color: #f9f9f9; /* Fondo claro */
+  min-height: calc(100vh - 60px); /* Resta la altura del header */
+  background-color: #fffbeb; /* Fondo claro */
+  padding-top: 60px; /* Añade padding superior */
+  box-sizing: border-box; /* Incluye padding en el cálculo total */
 }
 
 .register-form {
@@ -41,12 +43,25 @@ button {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
-  color: white;
+  background-color: #fde7b6;
+  color: #0e0b08;
   font-size: 16px;
   cursor: pointer;
 }
 
 button:hover {
   background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .register-container {
+    padding-top: 80px; /* Más espacio en móviles */
+    min-height: calc(100vh - 80px);
+  }
+
+  .register-form {
+    width: 90%; /* Hace el formulario más responsivo */
+    max-width: 350px;
+  }
 }
